@@ -1,0 +1,53 @@
+# omnetpp_interface.py
+import subprocess
+import json
+import tempfile
+import os
+
+class OMNeTppInterface:
+    def __init__(self, omnetpp_path, model_path):
+        self.omnetpp_path = omnetpp_path
+        self.model_path = model_path
+    
+    def create_simulation_config(self, network_state, flows, routing_decisions):
+        """Create OMNeT++ configuration file"""
+        config = {
+            'network': self._convert_to_omnetpp_topology(network_state),
+            'flows': flows,
+            'routing_table': routing_decisions,
+            'simulation_time': 1000,  # seconds
+            'results_file': 'simulation_results.vec'
+        }
+        
+        config_file = tempfile.NamedTemporaryFile(mode='w', suffix='.ini', delete=False)
+        json.dump(config, config_file, indent=2)
+        config_file.close()
+        return config_file.name
+    
+    def run_simulation(self, config_file):
+        """Run OMNeT++ simulation"""
+        cmd = [
+            os.path.join(self.omnetpp_path, 'bin', 'opp_run'),
+            '-f', config_file,
+            '-n', self.model_path,
+            'SatelliteNetwork'
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        
+        if result.returncode != 0:
+            raise Exception(f"OMNeT++ simulation failed: {result.stderr}")
+        
+        return self._parse_results('simulation_results.vec')
+    
+    def _parse_results(self, results_file):
+        """Parse OMNeT++ simulation results"""
+        # Parse .vec or .sca files
+        results = {
+            'end_to_end_delay': [],
+            'packet_loss_rate': 0.0,
+            'throughput': 0.0,
+            'utilization': {}
+        }
+        # Implementation depends on your OMNeT++ model
+        return results

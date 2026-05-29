@@ -1,0 +1,11 @@
+{
+  "total_training_time_seconds": 8645.355485916138,
+  "total_episodes": 2000,
+  "final_reward": 4.58396688256832,
+  "final_delay": 3.2488327009658104,
+  "average_reward": 14.650078077543613,
+  "average_delay": 2.801094032111816,
+  "best_reward": 46.03437010177236,
+  "best_delay": 0.20549432000555812,
+  "best_completion_rate": 1.0
+}
