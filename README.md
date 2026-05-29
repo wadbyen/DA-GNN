@@ -1,0 +1,4 @@
+# DA-GNN Delay-aware satellite networks traffic optimization 
+# Introduction
+Delay-aware traffic optimization model for satellite networks that employ Graph Neural Network (GNN)-based attention and GRU with reinforcement learning (DA-GNN). The prediction model combines GNN methods with attention mechanisms and GRU to predict end-to-end delays. The prediction module uses message passing with multi-head attention to capture short- and long-range spatial dependencies among satellites, queues, and flows, while a GRU cell inside each spatio-temporal layer threads a per-node hidden state across consecutive topology snapshots. This explicit temporal recurrence captures satellite orbital dynamics and inter-satellite link handovers. 
+The Dueling DQN agent employs these enhanced delay predictions as a state abstraction and selects routes from a k-shortest-paths action space that improves routing performance  
