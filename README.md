@@ -5,14 +5,13 @@ The Dueling DQN agent employs these enhanced delay predictions as a state abstra
 ## Files
 | File | Status |
 |------|--------|
-| `config.py` | single source of truth for all dims |
-| `environment_n.py` | flow types as strings, canonical link keys, 7-node/9-edge features |
-| `gnn_model.py` | real edge_index, defensive feature padding, flow-pair head |
-| `dqn_components.py` | PER max-priority fix, cleaner NoisyLinear |
-| `dqn_agent_d.py` |  Dueling-DQN + Huber
-| `train_dqn_d.py` | GNN-blended delay, config-driven dims, longer episodes |
-| `train_dqn_s.py` | applied targeted  ) |
-| `utils.py` | Utilites |
+| `config.py` | Configuration classes, DQN, and traffic patterns |
+| `environment_n.py` | Satellite Network Environment with dynamic conditions |
+| `gnn_model.py` | GNN Delay Predictor with multi-head attention and Spatio-Temporal  |
+| `dqn_components.py` | DQN Neural Network Components (PyTorch) |
+| `dqn_agent_d.py` |  Delay-Aware Dueling DQN Agent
+| `train_dqn_d.py` | Trainer for the Delay-Aware Dueling DQN |
+| `utils.py` | Visualization, logging and IO helpers |
 
 ## C++ / OMNeT++ files
 `SatelliteController.{cc,h}`, `SatelliteLink.{cc,h}`, `satellite_network.ned`,
@@ -41,3 +40,5 @@ python=3.9 torch==2.5.1 tsai==0.3.0 numpy==1.25.2 torch_geometric==2.3.1
 
 ## Run traning model
 python train_dqn_d.py --episodes 500
+
+
